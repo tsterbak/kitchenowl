@@ -207,6 +207,11 @@ class User(Model):
         ).all():
             s.created_by = None
             s.save()
+        from app.models import Planner
+
+        for p in Planner.query.filter(Planner.created_by == self.id).all():
+            p.created_by = None
+            p.save()
         super().delete()
 
     @classmethod

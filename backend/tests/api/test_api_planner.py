@@ -29,6 +29,27 @@ def test_meal_planning_cooking_date_field(
     assert actual == expected
 
 
+def test_meal_planning_created_by(
+    user_client_with_household, household_id, recipe_with_items
+):
+    """Test that the planner records who added a recipe"""
+    response = user_client_with_household.get("/api/user")
+    assert response.status_code == 200
+    user_id = response.get_json()["id"]
+
+    plan_data = {"recipe_id": recipe_with_items, "cooking_date": pytest.FIX_DATETIME}
+    response = user_client_with_household.post(
+        f"/api/household/{household_id}/planner/recipe", json=plan_data
+    )
+    assert response.status_code == 200
+
+    response = user_client_with_household.get(f"/api/household/{household_id}/planner")
+    assert response.status_code == 200
+    planned_meals = response.get_json()
+    assert len(planned_meals) == 1
+    assert planned_meals[0]["created_by"] == user_id
+
+
 def test_meal_planning_remove_by_datetime(
     user_client_with_household, household_id, planned_recipe
 ):

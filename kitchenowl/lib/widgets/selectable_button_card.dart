@@ -8,6 +8,7 @@ class SelectableButtonCard extends StatefulWidget {
   final void Function()? onPressed;
   final void Function()? onLongPressed;
   final Widget? extraOption;
+  final Widget? badge;
 
   const SelectableButtonCard({
     super.key,
@@ -18,6 +19,7 @@ class SelectableButtonCard extends StatefulWidget {
     this.onLongPressed,
     this.selected = false,
     this.extraOption,
+    this.badge,
   });
 
   @override
@@ -67,6 +69,12 @@ class _SelectableButtonCardState extends State<SelectableButtonCard> {
                       ? Theme.of(context).colorScheme.onPrimary
                       : null,
                   icon: const Icon(Icons.more_horiz_rounded),
+                ),
+              if (widget.badge != null)
+                Positioned(
+                  left: 4,
+                  top: 4,
+                  child: widget.badge!,
                 ),
               Column(
                 mainAxisSize: MainAxisSize.max,
