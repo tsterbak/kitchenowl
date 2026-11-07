@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,8 @@ import 'package:kitchenowl/enums/update_enum.dart';
 import 'package:kitchenowl/kitchenowl.dart';
 import 'package:kitchenowl/models/household.dart';
 import 'package:kitchenowl/models/item.dart';
+import 'package:kitchenowl/models/member.dart';
+import 'package:kitchenowl/models/planner.dart';
 import 'package:kitchenowl/models/recipe.dart';
 import 'package:kitchenowl/models/shoppinglist.dart';
 import 'package:kitchenowl/pages/item_selection_page.dart';
@@ -76,6 +79,17 @@ class PlannerPage extends StatefulWidget {
 class _PlannerPageState extends State<PlannerPage> {
   final TextEditingController searchController = TextEditingController();
   final ScrollController suggestedRecipesScrollController = ScrollController();
+
+  Widget? _plannedByBadge(List<Member>? members, RecipePlan plan) {
+    if (plan.createdById == null || members == null) return null;
+    final member = members.firstWhereOrNull((e) => e.id == plan.createdById);
+    if (member == null) return null;
+    return Tooltip(
+      message: member.name,
+      waitDuration: const Duration(milliseconds: 500),
+      child: UserCircleAvatar(user: member, radius: 9),
+    );
+  }
 
   @override
   void initState() {
@@ -200,6 +214,10 @@ class _PlannerPageState extends State<PlannerPage> {
                                     title: plan.recipe.name,
                                     selected: true,
                                     description: plan.yields?.toString(),
+                                    badge: _plannedByBadge(
+                                      household.member,
+                                      plan,
+                                    ),
                                     onPressed: () {
                                       cubit.remove(plan.recipe);
                                     },
@@ -251,6 +269,10 @@ class _PlannerPageState extends State<PlannerPage> {
                                           ),
                                           title: plan.recipe.name,
                                           description: plan.yields?.toString(),
+                                          badge: _plannedByBadge(
+                                            household.member,
+                                            plan,
+                                          ),
                                           selected: plan.cookingDate == null ||
                                               !_toDate(plan.cookingDate!)
                                                   .isBefore(

@@ -8,7 +8,7 @@ from datetime import datetime, date
 
 Model = db.Model
 if TYPE_CHECKING:
-    from app.models import Household, Recipe
+    from app.models import Household, Recipe, User
     from app.helpers.db_model_base import DbModelBase
 
     Model = DbModelBase
@@ -22,6 +22,9 @@ class Planner(Model, DbModelAuthorizeMixin):
     )
     cooking_date: Mapped[datetime] = db.Column(db.DateTime, primary_key=True)
     yields: Mapped[int] = db.Column(db.Integer)
+    created_by: Mapped[int | None] = db.Column(
+        db.Integer, db.ForeignKey("user.id"), nullable=True
+    )
     household_id: Mapped[int] = db.Column(
         db.Integer, db.ForeignKey("household.id"), nullable=False, index=True
     )
@@ -38,6 +41,14 @@ class Planner(Model, DbModelAuthorizeMixin):
         db.relationship(
             "Recipe",
             back_populates="plans",
+        ),
+    )
+    created_by_user: Mapped["User"] = cast(
+        Mapped["User"],
+        db.relationship(
+            "User",
+            foreign_keys=[created_by],
+            uselist=False,
         ),
     )
 

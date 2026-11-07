@@ -5,11 +5,13 @@ class RecipePlan extends Model {
   final Recipe recipe;
   final DateTime? cookingDate;
   final int? yields;
+  final int? createdById;
 
   RecipePlan({
     required this.recipe,
     this.cookingDate,
     this.yields,
+    this.createdById,
   });
 
   factory RecipePlan.fromJson(Map<String, dynamic> map) {
@@ -19,6 +21,7 @@ class RecipePlan extends Model {
       recipe: Recipe.fromJson(map['recipe']),
       cookingDate: DateTime.utc(date.year, date.month, date.day),
       yields: map['yields'],
+      createdById: map['created_by'],
     );
   }
 
@@ -28,7 +31,7 @@ class RecipePlan extends Model {
   }
 
   @override
-  List<Object?> get props => [recipe, cookingDate, yields];
+  List<Object?> get props => [recipe, cookingDate, yields, createdById];
 
   @override
   Map<String, dynamic> toJson() => {
@@ -42,6 +45,7 @@ class RecipePlan extends Model {
   Map<String, dynamic> toJsonWithId() => toJson()
     ..addAll({
       "recipe": recipe.toJson(),
+      "created_by": createdById,
     });
 
   bool get isWithoutPlannedDay =>

@@ -1,6 +1,6 @@
 from app.errors import NotFoundRequest
 from flask import jsonify, Blueprint
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import current_user, jwt_required
 from app import db
 from app.helpers import validate_args, authorize_household
 from app.models import Recipe, RecipeHistory, Planner
@@ -102,6 +102,7 @@ def addPlannedRecipe(args, household_id):
         planner.recipe_id = recipe.id
         planner.household_id = household_id
         planner.cooking_date = datetime.combine(cooking_date, datetime.min.time())
+        planner.created_by = current_user.id
         if "yields" in args:
             planner.yields = args["yields"]
         planner.save()
