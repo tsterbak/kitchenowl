@@ -668,6 +668,7 @@ def _tool_add_planner_entry(args: dict[str, Any]) -> Any:
         cooking_date=cooking_date,
         yields=int(args.get("yields", 1)),
     )
+    plan.created_by = current_user.id
     plan.save()
     return plan.obj_to_full_dict()
 

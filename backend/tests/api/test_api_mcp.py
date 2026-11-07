@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
 
 import pytest
@@ -486,3 +486,51 @@ def test_mcp_scrape_recipe_tool_unsupported(user_client_with_household, househol
     assert 'error' in body
     assert body['error']['code'] == -32000
     assert 'Unsupported website' in body['error']['message']
+
+
+def test_mcp_add_planner_entry_records_created_by(
+    user_client_with_household, household_id, recipe_with_items
+):
+    """Test that the MCP planner tool records who added a recipe"""
+    user_res = user_client_with_household.get('/api/user')
+    assert user_res.status_code == 200
+    user_id = user_res.get_json()['id']
+
+    cooking_date = (
+        datetime.now(UTC)
+        .replace(hour=0, minute=0, second=0, microsecond=0)
+        + timedelta(days=3)
+    )
+
+    res = _rpc(
+        user_client_with_household,
+        'tools/call',
+        {
+            'name': 'add_planner_entry',
+            'arguments': {
+                'household_id': household_id,
+                'recipe_id': recipe_with_items,
+                'cooking_date': cooking_date.isoformat(),
+            },
+        },
+    )
+    assert res.status_code == 200
+    body = res.get_json()
+    assert 'error' not in body
+    assert (
+        body['result']['structuredContent']['created_by'] == user_id
+    )
+
+    res = _rpc(
+        user_client_with_household,
+        'tools/call',
+        {
+            'name': 'list_planner',
+            'arguments': {'household_id': household_id},
+        },
+    )
+    assert res.status_code == 200
+    items = res.get_json()['result']['structuredContent']['items']
+    assert len(items) == 1
+    assert items[0]['created_by'] == user_id
+
