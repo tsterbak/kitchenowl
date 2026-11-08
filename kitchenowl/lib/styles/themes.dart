@@ -81,10 +81,9 @@ abstract class AppThemes {
       ),
       shape: WidgetStatePropertyAll(AppRadius.rounded(AppRadius.md)),
       textStyle: WidgetStatePropertyAll(
-        TextStyle(
+        base.textTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.w600,
           letterSpacing: 0.1,
-          fontSize: 0.95,
         ),
       ),
     );
