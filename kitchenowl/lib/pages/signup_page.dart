@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +70,7 @@ class _SignupPageState extends State<SignupPage> {
                           Theme.of(context).brightness == Brightness.dark
                       ? Theme.of(context).colorScheme.surfaceBright
                       : Theme.of(context).colorScheme.surfaceContainer,
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(AppRadius.xl),
                 ),
               ),
             ),

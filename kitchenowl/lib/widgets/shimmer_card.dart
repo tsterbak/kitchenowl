@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerCard extends StatelessWidget {
@@ -11,8 +12,9 @@ class ShimmerCard extends StatelessWidget {
     return Card(
       margin: margin,
       child: Shimmer.fromColors(
-        baseColor: Colors.grey.withAlpha(102),
-        highlightColor: Colors.grey[300]!.withAlpha(230),
+        baseColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.06),
+        highlightColor:
+            Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.14),
         child: ListTile(
           trailing: trailing,
           title: const Row(
@@ -40,8 +42,8 @@ class ShimmerText extends StatelessWidget {
         maxWidth: maxWidth,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(AppRadius.sm),
+        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.06),
       ),
     );
   }

@@ -22,7 +22,9 @@ class ShimmerShoppingItemWidget extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             child: Shimmer.fromColors(
               baseColor: color,
-              highlightColor: Colors.grey[300]!.withAlpha(128),
+              highlightColor: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.14),
               child: Material(
                 color: color,
                 shape: const RoundedRectangleBorder(

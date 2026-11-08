@@ -48,7 +48,6 @@ class _TextDialogState extends State<TextDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       title: Text(widget.title),
       content: SingleChildScrollView(
         child: Column(

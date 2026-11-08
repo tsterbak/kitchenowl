@@ -260,6 +260,18 @@ class _RecipeListPageState extends State<RecipeListPage> {
                           child: IndexBar(
                             controller: scrollController,
                             names: recipes.map((r) => r.name).toList(),
+                            textStyle: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                            selectTextStyle: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             indexHintDecoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Theme.of(context)

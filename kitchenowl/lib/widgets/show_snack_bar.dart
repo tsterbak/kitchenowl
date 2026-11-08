@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackbar({
   required BuildContext context,
@@ -23,7 +24,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackbar({
         ),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         clipBehavior: Clip.none,
         backgroundColor: Theme.of(context).cardColor,

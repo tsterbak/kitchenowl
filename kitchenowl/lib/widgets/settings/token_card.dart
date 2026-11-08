@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:kitchenowl/kitchenowl.dart';
 import 'package:kitchenowl/models/token.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:kitchenowl/widgets/settings/token_bottom_sheet.dart';
 
 class TokenCard extends StatelessWidget {
@@ -65,24 +66,24 @@ class TokenCard extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          color: Theme.of(context).colorScheme.errorContainer,
         ),
-        child: const Icon(
+        child: Icon(
           Icons.delete,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onErrorContainer,
         ),
       ),
       secondaryBackground: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          color: Theme.of(context).colorScheme.errorContainer,
         ),
-        child: const Icon(
+        child: Icon(
           Icons.delete,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onErrorContainer,
         ),
       ),
       child: child,

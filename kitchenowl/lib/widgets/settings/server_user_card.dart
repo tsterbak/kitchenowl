@@ -5,6 +5,7 @@ import 'package:kitchenowl/enums/update_enum.dart';
 import 'package:kitchenowl/kitchenowl.dart';
 import 'package:kitchenowl/models/user.dart';
 import 'package:kitchenowl/pages/settings_user_page.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:kitchenowl/widgets/user_list_tile.dart';
 
 class ServerUserListTile extends StatelessWidget {
@@ -20,24 +21,24 @@ class ServerUserListTile extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          color: Theme.of(context).colorScheme.errorContainer,
         ),
-        child: const Icon(
+        child: Icon(
           Icons.delete,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onErrorContainer,
         ),
       ),
       secondaryBackground: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          color: Theme.of(context).colorScheme.errorContainer,
         ),
-        child: const Icon(
+        child: Icon(
           Icons.delete,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onErrorContainer,
         ),
       ),
       confirmDismiss: (direction) async {
@@ -63,7 +64,9 @@ class ServerUserListTile extends StatelessWidget {
         trailing: user.hasServerAdminRights()
             ? Icon(
                 Icons.admin_panel_settings_rounded,
-                color: user.serverAdmin ? Colors.redAccent : null,
+                color: user.serverAdmin
+                    ? Theme.of(context).colorScheme.error
+                    : null,
               )
             : null,
         onTap: () async {

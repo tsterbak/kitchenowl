@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kitchenowl/cubits/household_add_update/household_update_cubit.dart';
@@ -19,10 +20,10 @@ class SliverHouseholdDangerZone extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           border: Border.all(
-            color: Colors.redAccent,
-            width: 2,
+            color: Theme.of(context).colorScheme.error.withValues(alpha: 0.6),
+            width: 1.5,
           ),
         ),
         padding: const EdgeInsets.all(16),
@@ -101,10 +102,10 @@ class SliverHouseholdDangerZone extends StatelessWidget {
             LoadingElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all<Color>(
-                  Colors.redAccent,
+                  Theme.of(context).colorScheme.error,
                 ),
                 foregroundColor: WidgetStateProperty.all<Color>(
-                  Colors.white,
+                  Theme.of(context).colorScheme.onError,
                 ),
               ),
               onPressed: () async {

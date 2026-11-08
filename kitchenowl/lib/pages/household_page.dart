@@ -203,7 +203,7 @@ class _HouseholdPageState extends State<HouseholdPage>
           Widget body = Align(
             alignment: Alignment.topCenter,
             child: ConstrainedBox(
-              constraints: const BoxConstraints.expand(width: 1600),
+              constraints: const BoxConstraints.expand(width: 1200),
               child: widget.child,
             ),
           );

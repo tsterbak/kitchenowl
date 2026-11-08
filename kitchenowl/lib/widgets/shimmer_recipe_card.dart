@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:kitchenowl/widgets/shimmer_card.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,8 +18,11 @@ class ShimmerRecipeCard extends StatelessWidget {
       ),
       child: Card(
         child: Shimmer.fromColors(
-            baseColor: Colors.grey.withAlpha(102),
-            highlightColor: Colors.grey[300]!.withAlpha(230),
+            baseColor:
+                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.06),
+            highlightColor: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -26,8 +30,9 @@ class ShimmerRecipeCard extends StatelessWidget {
                   flex: 3,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
+                      color: Theme.of(context).colorScheme.onSurface
+                          .withValues(alpha: 0.06),
                     ),
                   ),
                 ),

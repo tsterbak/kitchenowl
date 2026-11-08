@@ -8,8 +8,8 @@ Future<bool> askForConfirmation({
   String? confirmText,
   String? cancelText,
   bool showCancel = true,
-  Color? confirmBackgroundColor = Colors.redAccent,
-  Color? confirmForegroundColor = Colors.white,
+  Color? confirmBackgroundColor,
+  Color? confirmForegroundColor,
   Color? cancelColor,
 }) async =>
     await showDialog<bool>(
@@ -18,9 +18,6 @@ Future<bool> askForConfirmation({
         return AlertDialog(
           title: title,
           content: content,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
           actions: <Widget>[
             if (showCancel)
               TextButton(
@@ -35,21 +32,16 @@ Future<bool> askForConfirmation({
                 ),
               ),
             FilledButton(
-              style: confirmBackgroundColor != null ||
-                      confirmForegroundColor != null
-                  ? ButtonStyle(
-                      backgroundColor: confirmBackgroundColor != null
-                          ? WidgetStateProperty.all<Color>(
-                              confirmBackgroundColor,
-                            )
-                          : null,
-                      foregroundColor: confirmForegroundColor != null
-                          ? WidgetStateProperty.all<Color>(
-                              confirmForegroundColor,
-                            )
-                          : null,
-                    )
-                  : null,
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all<Color>(
+                  confirmBackgroundColor ??
+                      Theme.of(context).colorScheme.error,
+                ),
+                foregroundColor: WidgetStateProperty.all<Color>(
+                  confirmForegroundColor ??
+                      Theme.of(context).colorScheme.onError,
+                ),
+              ),
               onPressed: () => Navigator.of(context).pop(true),
               child: Text(confirmText ?? AppLocalizations.of(context)!.delete),
             ),

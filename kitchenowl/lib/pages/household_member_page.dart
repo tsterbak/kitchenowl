@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kitchenowl/cubits/auth_cubit.dart';
 import 'package:kitchenowl/cubits/household_member_cubit.dart';
@@ -90,24 +91,30 @@ class _HouseholdMemberPageState extends State<HouseholdMemberPage> {
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.only(left: 16),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(AppRadius.lg),
+                              color:
+                                  Theme.of(context).colorScheme.errorContainer,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.delete,
-                              color: Colors.white,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onErrorContainer,
                             ),
                           ),
                           secondaryBackground: Container(
                             alignment: Alignment.centerRight,
                             padding: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(AppRadius.lg),
+                              color:
+                                  Theme.of(context).colorScheme.errorContainer,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.delete,
-                              color: Colors.white,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onErrorContainer,
                             ),
                           ),
                           key: ValueKey<Member>(state.member[i]),

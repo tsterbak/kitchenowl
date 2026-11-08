@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                           Theme.of(context).brightness == Brightness.dark
                       ? Theme.of(context).colorScheme.surfaceBright
                       : Theme.of(context).colorScheme.surfaceContainer,
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(AppRadius.xl),
                 ),
               ),
             ),
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                 '${AppLocalizations.of(context)!.loginTo} ${Uri.parse(ApiService.getInstance().baseUrl).authority}',
                               ),
                             if (_displayUsernamePassword()) ...[
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 24),
                               TextField(
                                 controller: usernameController,
                                 autofocus: true,
@@ -132,6 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                       AppLocalizations.of(context)!.username,
                                 ),
                               ),
+                              const SizedBox(height: 12),
                               TextField(
                                 controller: passwordController,
                                 obscureText: true,
