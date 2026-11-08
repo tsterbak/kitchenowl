@@ -65,10 +65,22 @@ class _RecipeListPageState extends State<RecipeListPage> {
     return SafeArea(
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 14, 20, 2),
+            child: Text(
+              AppLocalizations.of(context)!.recipes,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w800, letterSpacing: -0.6),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
           SizedBox(
-            height: 70,
+            height: 64,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 6),
               child: BlocListener<RecipeListCubit, RecipeListState>(
                 bloc: cubit,
                 listener: (context, state) {
@@ -256,40 +268,43 @@ class _RecipeListPageState extends State<RecipeListPage> {
                       ),
                       if (state is! SearchRecipeListState)
                         Align(
-                          alignment: Alignment.centerLeft,
-                          child: IndexBar(
-                            controller: scrollController,
-                            names: recipes.map((r) => r.name).toList(),
-                            textStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                            ),
-                            selectTextStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            indexHintDecoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withAlpha(0xFF),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black54,
-                                  offset: Offset(1, 1),
-                                  blurRadius: 6,
-                                  spreadRadius: -2,
-                                ),
-                              ],
-                            ),
-                            indexHintTextStyle: TextStyle(
-                              fontSize: 20,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 4),
+                            child: IndexBar(
+                              controller: scrollController,
+                              names: recipes.map((r) => r.name).toList(),
+                              textStyle: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                              ),
+                              selectTextStyle: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              indexHintDecoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withAlpha(0xFF),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black54,
+                                    offset: Offset(1, 1),
+                                    blurRadius: 6,
+                                    spreadRadius: -2,
+                                  ),
+                                ],
+                              ),
+                              indexHintTextStyle: TextStyle(
+                                fontSize: 20,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),

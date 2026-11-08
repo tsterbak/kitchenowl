@@ -139,10 +139,31 @@ class _ShoppinglistPageState extends State<ShoppinglistPage> {
     return SafeArea(
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 14, 20, 2),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context)!.shoppingList,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: -0.6,
+                        ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
-            height: 70,
+            height: 64,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 6),
               child: BlocListener<ShoppinglistCubit, ShoppinglistCubitState>(
                 bloc: cubit,
                 listener: (context, state) {

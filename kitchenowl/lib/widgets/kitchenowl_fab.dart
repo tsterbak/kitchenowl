@@ -28,7 +28,7 @@ class KitchenOwlFab extends StatelessWidget {
       clipBehavior: Clip.none,
       closedShape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(14),
+          Radius.circular(18),
         ),
       ),
       closedColor:
@@ -38,13 +38,55 @@ class KitchenOwlFab extends StatelessWidget {
         BuildContext context,
         VoidCallback openContainer,
       ) {
-        return FloatingActionButton(
-          tooltip: tooltip,
-          onPressed: openContainer,
-          child: Icon(
-            icon,
-            color: Theme.of(context).colorScheme.onSecondary,
+        final scheme = Theme.of(context).colorScheme;
+        return Tooltip(
+          message: tooltip ?? '',
+          child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: scheme.primary.withAlpha(90),
+                blurRadius: 22,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
+          child: Material(
+            color: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(18),
+              onTap: openContainer,
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.alphaBlend(
+                          scheme.onPrimary.withAlpha(26), scheme.primary),
+                      scheme.primary,
+                      Color.alphaBlend(
+                          scheme.tertiary.withAlpha(80), scheme.primary),
+                    ],
+                  ),
+                ),
+                child: SizedBox(
+                  width: 56,
+                  height: 56,
+                  child: Icon(
+                    icon,
+                    color: scheme.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         );
       },
     );

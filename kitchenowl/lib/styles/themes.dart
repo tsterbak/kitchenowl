@@ -203,11 +203,13 @@ abstract class AppThemes {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: colorScheme.primaryContainer,
-        foregroundColor: colorScheme.onPrimaryContainer,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         elevation: 0,
         highlightElevation: 0,
-        shape: AppRadius.rounded(AppRadius.lg),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+        ),
       ),
       filledButtonTheme: FilledButtonThemeData(style: buttonStyle),
       elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),

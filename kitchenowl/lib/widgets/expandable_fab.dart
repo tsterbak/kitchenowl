@@ -145,10 +145,22 @@ class ExpandableFabState extends State<ExpandableFab>
           opacity: _open ? 0.0 : 1.0,
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
-          child: FloatingActionButton(
-            tooltip: widget.tooltip ?? "",
-            onPressed: _toggle,
-            child: widget.openIcon,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).colorScheme.primary.withAlpha(90),
+                  blurRadius: 22,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: FloatingActionButton(
+              tooltip: widget.tooltip ?? "",
+              onPressed: _toggle,
+              child: widget.openIcon,
+            ),
           ),
         ),
       ),
