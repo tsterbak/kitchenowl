@@ -145,20 +145,22 @@ class _PlannerPageState extends State<PlannerPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     sliver: SliverToBoxAdapter(
                       child: Container(
-                        height: 80,
+                        height: 88,
                         alignment: Alignment.centerLeft,
                         child: Row(
                           children: [
                             Expanded(
                               child: Text(
                                 AppLocalizations.of(context)!.plannerTitle,
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(fontWeight: FontWeight.w800),
                               ),
                             ),
                             if (state.recipePlans.isNotEmpty &&
                                 household.defaultShoppingList != null)
-                              IconButton(
+                              IconButton.filledTonal(
                                 tooltip: AppLocalizations.of(context)!.itemsAdd,
                                 onPressed: () =>
                                     _openItemSelectionPage(context, cubit),

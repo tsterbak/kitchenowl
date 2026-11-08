@@ -83,14 +83,17 @@ class _ExpensePageState extends State<ExpenseListPage> {
                   );
 
                   final title = Container(
-                    height: 80,
+                    height: 88,
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
                         Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.balances,
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(fontWeight: FontWeight.w800),
                           ),
                         ),
                         if (state.sorting == ExpenselistSorting.personal ||

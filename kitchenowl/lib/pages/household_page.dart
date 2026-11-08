@@ -13,6 +13,7 @@ import 'package:kitchenowl/pages/household_page/household_drawer.dart';
 import 'package:kitchenowl/pages/household_page/household_navigation_rail.dart';
 import 'package:kitchenowl/pages/household_page/more.dart';
 import 'package:kitchenowl/pages/page_not_found.dart';
+import 'package:kitchenowl/styles/themes.dart';
 import 'package:kitchenowl/router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -236,6 +237,7 @@ class _HouseholdPageState extends State<HouseholdPage>
 
           return Scaffold(
             key: scaffoldKey,
+            extendBody: true,
             body: body,
             floatingActionButton:
                 pages[_selectedIndex].floatingActionButton(context),
@@ -248,24 +250,65 @@ class _HouseholdPageState extends State<HouseholdPage>
             drawerEnableOpenDragGesture: false,
             bottomNavigationBar: useBottomNavigationBar
                 ? BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) => NavigationBar(
-                      labelBehavior:
-                          NavigationDestinationLabelBehavior.onlyShowSelected,
-                      destinations: pages
-                          .map((e) => NavigationDestination(
-                                icon: e.toIconWidget(context) ??
-                                    Icon(e.toIcon(context)),
-                                selectedIcon: Icon(e.toSelectedIcon(context)),
-                                label: e.toLocalizedShortString(context),
-                                tooltip: e.toLocalizedString(context),
-                              ))
-                          .take(5)
-                          .toList(),
-                      selectedIndex: _selectedIndex,
-                      onDestinationSelected: (i) => _onItemTapped(
-                        context,
-                        pages[i],
-                        pages[_selectedIndex],
+                    builder: (context, state) => Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        16,
+                        0,
+                        16,
+                        MediaQuery.of(context).padding.bottom > 0
+                            ? 10
+                            : 16,
+                      ),
+                      child: Material(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainer
+                                .withAlpha(242),
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.sheet),
+                            border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .outlineVariant
+                                  .withAlpha(80),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withAlpha(28),
+                                blurRadius: 20,
+                                offset: const Offset(0, 6),
+                              ),
+                            ],
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: NavigationBar(
+                            elevation: 0,
+                            height: 68,
+                            labelBehavior: NavigationDestinationLabelBehavior
+                                .onlyShowSelected,
+                            destinations: pages
+                                .map((e) => NavigationDestination(
+                                      icon: e.toIconWidget(context) ??
+                                          Icon(e.toIcon(context)),
+                                      selectedIcon:
+                                          Icon(e.toSelectedIcon(context)),
+                                      label: e.toLocalizedShortString(context),
+                                      tooltip: e.toLocalizedString(context),
+                                    ))
+                                .take(5)
+                                .toList(),
+                            selectedIndex: _selectedIndex,
+                            onDestinationSelected: (i) => _onItemTapped(
+                              context,
+                              pages[i],
+                              pages[_selectedIndex],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   )

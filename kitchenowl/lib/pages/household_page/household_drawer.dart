@@ -54,8 +54,20 @@ class HouseholdDrawer extends StatelessWidget {
       },
       children: [
         BlocBuilder<HouseholdCubit, HouseholdState>(
-          builder: (context, state) => Padding(
-            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+          builder: (context, state) => Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.alphaBlend(
+                      Theme.of(context).colorScheme.primary.withAlpha(30),
+                      Theme.of(context).colorScheme.surface),
+                  Theme.of(context).colorScheme.surface,
+                ],
+              ),
+            ),
+            padding: const EdgeInsets.fromLTRB(28, 20, 16, 14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -66,10 +78,24 @@ class HouseholdDrawer extends StatelessWidget {
                   ),
                 Text(
                   state.household.name,
-                  style: Theme.of(context).textTheme.titleSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.w700),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                if (state.household.description?.isNotEmpty ?? false)
+                  Text(
+                    state.household.description!,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurfaceVariant,
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
               ],
             ),
           ),

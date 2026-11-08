@@ -50,24 +50,64 @@ class _LoginPageState extends State<LoginPage> {
             desktop: true,
           ))
             Expanded(
-              child: Container(
-                child: SvgPicture(
-                  SvgAssetLoader(
-                    "assets/illustrations/shopping_app.svg",
-                    colorMapper: KitchenOwlColorMapper(
-                      accentColor: Theme.of(context).colorScheme.primary,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(28, 24, 14, 24),
+                child: Container(
+                  child: SvgPicture(
+                    SvgAssetLoader(
+                      "assets/illustrations/shopping_app.svg",
+                      colorMapper: KitchenOwlColorMapper(
+                        accentColor: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
+                    fit: BoxFit.scaleDown,
                   ),
-                  fit: BoxFit.scaleDown,
-                ),
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.all(50),
-                decoration: BoxDecoration(
-                  color: App.settings.accentColor == null &&
-                          Theme.of(context).brightness == Brightness.dark
-                      ? Theme.of(context).colorScheme.surfaceBright
-                      : Theme.of(context).colorScheme.surfaceContainer,
-                  borderRadius: BorderRadius.circular(AppRadius.xl),
+                  padding: const EdgeInsets.all(50),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: App.settings.accentColor == null &&
+                              Theme.of(context).brightness == Brightness.dark
+                          ? [
+                              Theme.of(context).colorScheme.surfaceBright.withAlpha(200),
+                              Color.alphaBlend(
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withAlpha(24),
+                                  Theme.of(context).colorScheme.surfaceBright),
+                            ]
+                          : [
+                              Color.alphaBlend(
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer
+                                      .withAlpha(150),
+                                  Theme.of(context).colorScheme.surfaceContainer),
+                              Color.alphaBlend(
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .tertiaryContainer
+                                      .withAlpha(90),
+                                  Theme.of(context).colorScheme.surfaceContainer),
+                            ],
+                    ),
+                    borderRadius: BorderRadius.circular(AppRadius.xl + 8),
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .outlineVariant
+                          .withAlpha(70),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withAlpha(20),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -108,9 +148,50 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Theme.of(context).colorScheme.primary,
+                                    Color.alphaBlend(
+                                        Theme.of(context)
+                                            .colorScheme
+                                            .tertiary
+                                            .withAlpha(90),
+                                        Theme.of(context).colorScheme.primary),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                    AppRadius.lg + 6),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withAlpha(60),
+                                    blurRadius: 18,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.shopping_basket_rounded,
+                                size: 30,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimary,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
                             Text(
                               AppLocalizations.of(context)!.welcomeBack,
-                              style: Theme.of(context).textTheme.headlineLarge,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.w800),
                             ),
                             const SizedBox(height: 10),
                             if (!App.isDefaultServer)
