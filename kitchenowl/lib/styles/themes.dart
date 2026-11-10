@@ -225,11 +225,7 @@ abstract class AppThemes {
           shape: AppRadius.rounded(AppRadius.md),
           minimumSize: Size(48, 44),
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          textStyle: TextStyle(
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.1,
-            fontSize: 0.95,
-          ),
+          textStyle: textTheme.labelLarge,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
